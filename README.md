@@ -1,4 +1,5 @@
 一个用于 hexo 的 live2d 看板娘插件，支持所有版本的模型。
+
 \_config.yml
 
 ```yaml
