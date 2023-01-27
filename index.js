@@ -19,7 +19,7 @@ hexo.extend.filter.register('after_generate', function () {
   //脚本资源
   const js_text = `<script data-pjax src="${data.CDN}"></script>`;
   //挂载容器脚本
-  var user_info_js = `<script data-pjax>
+  var user_info_js = `<script>
   OML2D.loadLive2DModel(${data.option});
   </script>`;
   // 注入用户脚本
