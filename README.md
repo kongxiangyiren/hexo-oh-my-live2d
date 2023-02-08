@@ -40,6 +40,8 @@ OhMyLive2d:
         interval: 15000
 ```
 
+css 修改
+
 ```css
 /* live2d 模型居右 */
 #oml-stage {
