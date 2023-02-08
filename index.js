@@ -1,7 +1,8 @@
 'use strict';
 
 const urlFor = require('hexo-util').url_for.bind(hexo);
-
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
 hexo.extend.filter.register('after_generate', function () {
   // 首先获取整体的配置项名称
   const config = hexo.config.OhMyLive2d;
@@ -10,14 +11,27 @@ hexo.extend.filter.register('after_generate', function () {
   // 集体声明配置项
   const data = {
     CDN: config.CDN
-      ? urlFor(config.CDN)
+      ? config.CDN === 'local'
+        ? 'local'
+        : urlFor(config.CDN)
       : 'https://npm.elemecdn.com/oh-my-live2d/dist/index.min.js',
     option: config.option ? JSON.stringify(config.option) : undefined
   };
 
   //cdn资源声明
   //脚本资源
-  const js_text = `<script data-pjax src="${data.CDN}"></script>`;
+  //脚本资源
+  let js_text;
+  if (data.CDN === 'local') {
+    js_text = `<script data-pjax>
+    ${readFileSync(resolve('./node_modules/oh-my-live2d/dist/index.min.js'), {
+      encoding: 'utf-8'
+    })}
+    </script>`;
+  } else {
+    js_text = `<script data-pjax src="${data.CDN}"></script>`;
+  }
+
   //挂载容器脚本
   var user_info_js = `<script>
   OML2D.loadOhMyLive2D(${data.option});

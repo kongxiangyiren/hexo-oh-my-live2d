@@ -1,6 +1,8 @@
 一个用于 hexo 的 live2d 看板娘插件，支持所有版本的模型。
 
-oh-my-live2d官网: https://oml2d.com/
+oh-my-live2d 官网: https://oml2d.com/
+
+将 CDN 改为 local 使用本地(不推荐)
 
 \_config.yml
 
