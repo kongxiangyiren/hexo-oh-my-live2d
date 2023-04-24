@@ -9,10 +9,10 @@ oh-my-live2d 官网: https://oml2d.com/
 ```yaml
 OhMyLive2d:
   enable: true
-  CDN: https://npm.elemecdn.com/oh-my-live2d@0.2.1/dist/index.min.js
-  #  非全部配置 详情请看 https://oml2d.com/
+  CDN: https://npm.elemecdn.com/oh-my-live2d@0.3.0/dist/index.min.js
   option:
     source: 'https://npm.elemecdn.com'
+    mobileShow: true # 手机端是否展示
     sayHello: false
     transitionTime: 1000
     models:
@@ -40,6 +40,21 @@ OhMyLive2d:
         offsetY: 90
       idleTips:
         interval: 15000
+        # remote: false # 自定义
+        remote: |
+          function() {
+            return new Promise((resolve, reject) => {
+              $.ajax({
+                type: 'get',
+                url: 'https://v1.hitokoto.cn?c=i',
+                dataType: 'json',
+                success: res => {
+                 // console.log(res);
+                  resolve({text: res.hitokoto});
+                }
+              });
+            });
+          }
 ```
 
 css 修改

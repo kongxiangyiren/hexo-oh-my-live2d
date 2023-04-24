@@ -18,15 +18,86 @@ hexo.extend.filter.register('after_generate', function () {
         ? `/pluginsSrc/${fullPath}`
         : urlFor(config.CDN)
       : 'https://npm.elemecdn.com/oh-my-live2d/dist/index.min.js',
-    option: config.option ? JSON.stringify(config.option) : undefined
+    option: config.option ? config.option : undefined
   };
 
   //脚本资源
   let js_text = `<script data-pjax src="${data.CDN}"></script>`;
-
   //挂载容器脚本
   var user_info_js = `<script>
-  OML2D.loadOhMyLive2D(${data.option});
+OML2D.loadOhMyLive2D({
+  ${
+    data.option.source !== undefined
+      ? `source:${JSON.stringify(data.option.source)},`
+      : ''
+  }
+  ${
+    data.option.mobileShow !== undefined
+      ? `mobileShow:${JSON.stringify(data.option.mobileShow)},`
+      : ''
+  }
+  ${
+    data.option.sayHello !== undefined
+      ? `sayHello:${JSON.stringify(data.option.sayHello)},`
+      : ''
+  }
+  ${
+    data.option.transitionTime !== undefined
+      ? `transitionTime:${JSON.stringify(data.option.transitionTime)},`
+      : ''
+  }
+  ${
+    data.option.models !== undefined
+      ? `models:${JSON.stringify(data.option.models)},`
+      : ''
+  }
+  tips:{
+    ${
+      data.option.tips.style !== undefined
+        ? `style:${JSON.stringify(data.option.tips.style)},`
+        : ''
+    }
+    ${
+      data.option.tips.welcomeTips !== undefined
+        ? `welcomeTips:${JSON.stringify(data.option.tips.welcomeTips)},`
+        : ''
+    }
+    ${
+      data.option.tips.copyTips !== undefined
+        ? `copyTips:${JSON.stringify(data.option.tips.copyTips)},`
+        : ''
+    }
+    idleTips:{
+      ${
+        data.option.tips.idleTips.message !== undefined
+          ? `message:${JSON.stringify(data.option.tips.idleTips.message)},`
+          : ''
+      }
+      ${
+        data.option.tips.idleTips.persistTime !== undefined
+          ? `persistTime:${JSON.stringify(
+              data.option.tips.idleTips.persistTime
+            )},`
+          : ''
+      }
+      ${
+        data.option.tips.idleTips.interval !== undefined
+          ? `interval:${JSON.stringify(data.option.tips.idleTips.interval)},`
+          : ''
+      }
+      ${
+        data.option.tips.idleTips.priority !== undefined
+          ? `priority:${JSON.stringify(data.option.tips.idleTips.priority)},`
+          : ''
+      }
+      ${
+        data.option.tips.idleTips.remote !== undefined
+          ? `remote:${data.option.tips.idleTips.remote},`
+          : ''
+      }
+    }
+  }
+  });
   </script>`;
 
   hexo.extend.injector.register('body_end', js_text, 'default');

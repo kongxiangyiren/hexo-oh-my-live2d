@@ -1,6 +1,6 @@
 {
   "name": "hexo-oh-my-live2d",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "一个用于hexo的live2d看板娘插件，支持所有版本的模型。",
   "main": "index.js",
   "keywords": [
@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/kongxiangyiren/hexo-oh-my-live2d#readme",
   "dependencies": {
-    "oh-my-live2d": "^0.2.1"
+    "oh-my-live2d": "^0.3.0"
   }
 }
