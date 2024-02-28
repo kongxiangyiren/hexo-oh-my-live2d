@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node18",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node", "hexo"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

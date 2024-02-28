@@ -1,16 +1,25 @@
 {
   "name": "hexo-oh-my-live2d",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "一个用于hexo的live2d看板娘插件，支持所有版本的模型。",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "live2d"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.com"
   },
   "author": "空巷一人",
   "license": "MIT",
+  "scripts": {
+    "prepare": "tsc",
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kongxiangyiren/hexo-oh-my-live2d.git"
@@ -20,6 +29,12 @@
   },
   "homepage": "https://github.com/kongxiangyiren/hexo-oh-my-live2d#readme",
   "dependencies": {
-    "oh-my-live2d": "^0.3.0"
+    "oh-my-live2d": "0.4.2"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@types/hexo": "^3.8.12",
+    "@types/node": "^18.19.19",
+    "typescript": "^5.3.3"
   }
 }

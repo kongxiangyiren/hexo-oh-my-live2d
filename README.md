@@ -9,86 +9,76 @@ oh-my-live2d 官网: https://oml2d.com/
 ```yaml
 OhMyLive2d:
   enable: true
-  CDN: https://npm.elemecdn.com/oh-my-live2d@0.3.0/dist/index.min.js
+  CDN: https://registry.npmmirror.com/oh-my-live2d/0.4.2/files/dist/index.min.js
   option:
-    source: 'https://npm.elemecdn.com'
-    mobileShow: true # 手机端是否展示
-    sayHello: false
-    transitionTime: 1000
+    fixed: true # 组件是否使用固定定位
     models:
-      - scale: 1.2
-        path: /live2d-widget-model-koharu@1.0.5/assets/koharu.model.json
-        x: 0
-        'y': 0
-        stageStyle:
-          backgroundColor: 'rgba(0, 0, 0, 0)'
-          width: auto
-          height: auto
-      - scale: 1.2
-        path: /live2d-widget-model-haruto@1.0.5/assets/haruto.model.json
-        x: 0
-        'y': 0
-        stageStyle:
-          backgroundColor: 'rgba(0, 0, 0, 0)'
-          width: auto
-          height: auto
+      - path: 'https://registry.npmmirror.com/live2d-widget-model-koharu/1.0.5/files/assets/koharu.model.json'
+        scale: 0.12
+        position: [0, 0]
+        # stageStyle:
+        #   backgroundColor: 'rgba(0, 0, 0, 0)'
+        #   width: 300
+        #   height: 400
+      - path: 'https://registry.npmmirror.com/live2d-widget-model-haruto/1.0.5/files/assets/haruto.model.json'
+        scale: 0.12
+        position: [0, 0]
+        # stageStyle:
+        #   backgroundColor: 'rgba(0, 0, 0, 0)'
+        #   width: 300
+        #   height: 400
+    parentElement: document.body #为组件提供一个父元素，如果未指定则默认挂载到 body 中
+    sayHello: false # 是否在初始化阶段打印项目信息
     tips:
       style:
         width: 230
         height: 120
         offsetX: 0
-        offsetY: 90
+        offsetY: -100
       idleTips:
-        interval: 15000
-        # remote: false # 自定义
-        remote: |
-          function() {
-            return new Promise((resolve, reject) => {
-              $.ajax({
-                type: 'get',
-                url: 'https://v1.hitokoto.cn?c=i',
-                dataType: 'json',
-                success: res => {
-                 // console.log(res);
-                  resolve({text: res.hitokoto});
-                }
-              });
-            });
-          }
+        # interval: 15000
+        message:
+          - '你好'
+          - '欢迎'
 ```
 
 css 修改
 
 ```css
 /* live2d 模型居右 */
-#oml-stage {
+#oml2dStage {
   right: 60px !important;
   left: auto !important;
   z-index: 30 !important;
 }
 /* live2d tips 深色 */
-[data-theme='dark'] #oml-tips {
-  background-color: #121212;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  /* filter: drop-shadow(0 0 5px #999); */
-  filter: none;
+[data-theme='dark'] #oml2dTips {
+  background-color: #121212 !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  /* filter: drop-shadow(0 0 5px #999)!important; */
+  filter: none !important;
+}
+
+/* live2d 左边提示 固定 */
+#oml2dStatusBar {
+  position: fixed !important;
 }
 /* live2d 左边提示 深色 */
-[data-theme='dark'] #oml-levitated-btn {
-  background-color: #121212;
-  border-style: solid;
-  border-width: 2px 2px 2px 0px;
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 4px #999;
+[data-theme='dark'] {
+  background-color: #121212 !important;
+  border-style: solid !important;
+  border-width: 2px 2px 2px 0px !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 4px #999 !important;
 }
 /* live2d 切换按钮 深色 */
-[data-theme='dark'] #oml-controls .oml-control-item {
+[data-theme='dark'] #oml2dMenus .oml2d-menus-item {
   background-color: #1f1f1f;
 }
-[data-theme='dark'] #oml-controls .oml-control-item:hover {
+[data-theme='dark'] #oml2dMenus .oml2d-menus-item:hover {
   background-color: #787878;
 }
-[data-theme='dark'] #oml-controls .oml-control-item svg {
+[data-theme='dark'] #oml2dMenus .oml2d-menus-item svg {
   color: rgba(255, 255, 255, 0.7);
 }
 ```
