@@ -20,9 +20,9 @@ hexo.extend.filter.register('after_generate', function () {
   };
 
   //脚本资源
-  let js_text = `<script data-pjax src="${data.CDN}"></script>`;
+  const js_text = `<script data-pjax src="${data.CDN}"></script>`;
   //挂载容器脚本
-  var user_info_js = `<script>
+  const user_info_js = `<script>
   OML2D.loadOml2d({
     ${data.option.fixed !== undefined ? `fixed:${data.option.fixed},` : ''}
     ${data.option.models !== undefined ? `models:${JSON.stringify(data.option.models)},` : ''}
@@ -34,12 +34,13 @@ hexo.extend.filter.register('after_generate', function () {
         : ''
     }
     ${data.option.tips !== undefined ? `tips:${JSON.stringify(data.option.tips)},` : ''}
-
   });
   </script>`;
 
-  hexo.extend.tag.register('body_end', () => js_text, { ends: true, async: true });
-  hexo.extend.tag.register('body_end', () => user_info_js, { ends: true, async: true });
+  // @ts-expect-error
+  hexo.extend.injector.register('body_end', js_text, 'default');
+  // @ts-expect-error
+  hexo.extend.injector.register('body_end', user_info_js, 'default');
 });
 
 // 本地cdn

@@ -4,10 +4,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
+    "removeComments": true,
     "types": ["node", "hexo"]
   },
   "include": ["src/**/*.ts"],
