@@ -9,7 +9,7 @@ oh-my-live2d 官网: https://oml2d.com/
 ```yaml
 OhMyLive2d:
   enable: true
-  CDN: https://registry.npmmirror.com/oh-my-live2d/0.4.2/files/dist/index.min.js
+  CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
   option:
     fixed: true # 组件是否使用固定定位
     models:
@@ -36,10 +36,8 @@ OhMyLive2d:
         offsetX: 0
         offsetY: -100
       idleTips:
-        # interval: 15000
-        message:
-          - '你好'
-          - '欢迎'
+        interval: 15000
+        wordTheDay: true
 ```
 
 css 修改
@@ -58,13 +56,8 @@ css 修改
   /* filter: drop-shadow(0 0 5px #999)!important; */
   filter: none !important;
 }
-
-/* live2d 左边提示 固定 */
-#oml2dStatusBar {
-  position: fixed !important;
-}
 /* live2d 左边提示 深色 */
-[data-theme='dark'] {
+[data-theme='dark'] #oml2dStatusBar {
   background-color: #121212 !important;
   border-style: solid !important;
   border-width: 2px 2px 2px 0px !important;

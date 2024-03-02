@@ -1,3 +1,4 @@
+/** @type { import("prettier").Config } */
 module.exports = {
   printWidth: 100, //超过最大值换行
   tabWidth: 2, //限制tab缩进字节数
