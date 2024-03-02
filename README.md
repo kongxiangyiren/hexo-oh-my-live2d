@@ -10,8 +10,14 @@ oh-my-live2d 官网: https://oml2d.com/
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.7.1/files/dist/index.min.js
   option:
     fixed: true # 组件是否使用固定定位
+    libraryUrls:
+      cubism2: https://registry.npmmirror.com/live2dcubismcore/latest/files/live2d.min.js
+      cubism5: https://registry.npmmirror.com/live2dcubismcore/latest/files/live2dcubismcore.min.js
+      # cubism2: https://registry.npmmirror.com/live2dcubismcore/1.0.2/files/live2d.min.js
+      # cubism5: https://registry.npmmirror.com/live2dcubismcore/1.0.2/files/live2dcubismcore.min.js
     models:
       - path: 'https://registry.npmmirror.com/live2d-widget-model-koharu/1.0.5/files/assets/koharu.model.json'
         scale: 0.12
