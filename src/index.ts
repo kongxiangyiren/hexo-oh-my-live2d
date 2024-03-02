@@ -35,7 +35,7 @@ hexo.extend.filter.register('after_generate', function () {
   // libraryUrls 自定义 Cubism SDK外部资源地址
   const libraryUrls =
     data.option && data.option.libraryUrls !== undefined
-      ? `importType:${JSON.stringify(data.option.libraryUrls)},`
+      ? `libraryUrls:${JSON.stringify(data.option.libraryUrls)},`
       : '';
 
   // models 定制模型配置, 类型是模型配置对象组成的数组, 默认值是空数组, 请至少配置一个有效的模型配置
