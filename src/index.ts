@@ -29,7 +29,7 @@ hexo.extend.filter.register('after_generate', function () {
   // importType 导入类型, 默认使用全量导入: 'complete'
   const importType =
     data.option && data.option.importType !== undefined
-      ? `importType:${data.option.importType},`
+      ? `importType:${JSON.stringify(data.option.importType)},`
       : '';
 
   // libraryUrls 自定义 Cubism SDK外部资源地址

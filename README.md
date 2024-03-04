@@ -10,7 +10,7 @@ oh-my-live2d 官网: https://oml2d.com/
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
-  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.7.1/files/dist/index.min.js
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.7/files/dist/index.min.js
   option:
     fixed: true # 组件是否使用固定定位
     libraryUrls:
