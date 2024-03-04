@@ -11,7 +11,7 @@
     "live2d"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.com"
+    "registry": "https://registry.npmjs.org"
   },
   "author": "空巷一人",
   "license": "MIT",
