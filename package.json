@@ -1,12 +1,15 @@
 {
   "name": "hexo-oh-my-live2d",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "一个用于hexo的live2d看板娘插件，支持所有版本的模型。",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "directories": {
+    "example": "example"
+  },
   "keywords": [
     "live2d"
   ],
@@ -18,7 +21,7 @@
   "scripts": {
     "prepare": "npm run lint && vite build",
     "build": "npm run lint && vite build",
-    "dev": "vite build -w",
+    "dev": "vite build -w --mode dev",
     "lint": "eslint src/ --ext .js,.cjs,.mjs,.ts,.cts,.mts --fix",
     "format": "prettier --write src/"
   },
@@ -31,7 +34,7 @@
   },
   "homepage": "https://github.com/kongxiangyiren/hexo-oh-my-live2d#readme",
   "dependencies": {
-    "oh-my-live2d": "^0.7.2"
+    "oh-my-live2d": "^0.8.1"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
@@ -49,6 +52,7 @@
     "prettier": "^3.2.5",
     "typescript": "^5.3.3",
     "vite": "^4.5.2",
+    "vite-copy-plugin": "^0.4.0",
     "vite-plugin-dts": "^3.7.3",
     "vite-plugin-node": "^3.1.0"
   }

@@ -21,63 +21,53 @@ hexo.extend.filter.register('after_generate', function () {
 
   // 脚本资源
   const js_text = `<script data-pjax src="${data.CDN}"></script>`;
+  // 用户自定义配置
+  const JsList: string[] = [];
+  for (const key in data.option) {
+    if (Object.prototype.hasOwnProperty.call(data.option, key)) {
+      const element = data.option[key];
+      // parentElement 不要转换成字符串
+      if (key === 'parentElement') {
+        JsList.push(`parentElement:${element}`);
+      } else if (key === 'tips') {
+        const tipsList: string[] = [];
+        for (const tipsKey in element) {
+          if (Object.prototype.hasOwnProperty.call(element, tipsKey)) {
+            const tipsElement = element[tipsKey];
+            if (tipsKey === 'idleTips') {
+              const idleTipsList: string[] = [];
+              for (const idleTipsKey in tipsElement) {
+                if (Object.prototype.hasOwnProperty.call(tipsElement, idleTipsKey)) {
+                  const idleTipsElement = tipsElement[idleTipsKey];
+                  if (idleTipsKey === 'wordTheDay') {
+                    idleTipsList.push(`wordTheDay:${idleTipsElement}`);
+                  } else if (idleTipsKey === 'message') {
+                    // 判断是不是数组
+                    if (Array.isArray(idleTipsElement)) {
+                      idleTipsList.push(`message:${JSON.stringify(idleTipsElement)}`);
+                    } else {
+                      idleTipsList.push(`message:${idleTipsElement}`);
+                    }
+                  } else {
+                    idleTipsList.push(`${idleTipsKey}:${JSON.stringify(idleTipsElement)}`);
+                  }
+                }
+              }
+              tipsList.push(`idleTips:{${idleTipsList.join(',')}}`);
+            } else {
+              tipsList.push(`${tipsKey}: ${JSON.stringify(tipsElement)}`);
+            }
+          }
+        }
+        JsList.push(`${key}:{${tipsList.join(',')}}`);
+      } else {
+        JsList.push(`${key}:${JSON.stringify(element)}`);
+      }
+    }
+  }
 
-  // 挂载容器脚本
-  // fixed 组件是否使用固定定位
-  const fixed = data.option && data.option.fixed !== undefined ? `fixed:${data.option.fixed},` : '';
-
-  // importType 导入类型, 默认使用全量导入: 'complete'
-  const importType =
-    data.option && data.option.importType !== undefined
-      ? `importType:${JSON.stringify(data.option.importType)},`
-      : '';
-
-  // libraryUrls 自定义 Cubism SDK外部资源地址
-  const libraryUrls =
-    data.option && data.option.libraryUrls !== undefined
-      ? `libraryUrls:${JSON.stringify(data.option.libraryUrls)},`
-      : '';
-
-  // models 定制模型配置, 类型是模型配置对象组成的数组, 默认值是空数组, 请至少配置一个有效的模型配置
-  const models =
-    data.option && data.option.models !== undefined
-      ? `models:${JSON.stringify(data.option.models)},`
-      : '';
-
-  // parentElement 为组件提供一个父元素，如果未指定则默认挂载到 body 中
-  const parentElement =
-    data.option && data.option.parentElement !== undefined
-      ? `parentElement:${data.option.parentElement},`
-      : '';
-
-  // sayHello 是否在初始化阶段打印项目信息
-  const sayHello =
-    data.option && data.option.sayHello !== undefined ? `sayHello:${data.option.sayHello},` : '';
-
-  // tips 自定义提示框样式和内容
-  const tips =
-    data.option && data.option.tips !== undefined
-      ? `tips:${JSON.stringify(data.option.tips)},`
-      : '';
-
-  // transitionTime 组件入场和离开的过渡动画时长,单位ms
-  const transitionTime =
-    data.option && data.option.transitionTime !== undefined
-      ? `transitionTime:${data.option.transitionTime},`
-      : '';
-
-  // 汇总拼接
-  const user_info_js =
-    '<script>OML2D.loadOml2d({' +
-    fixed +
-    importType +
-    libraryUrls +
-    models +
-    parentElement +
-    sayHello +
-    tips +
-    transitionTime +
-    '});</script>';
+  // 用户自定义配置
+  const user_info_js = '<script>OML2D.loadOml2d({' + JsList.join(',') + '});</script>';
 
   // @ts-expect-error
   hexo.extend.injector.register('body_end', js_text, 'default');

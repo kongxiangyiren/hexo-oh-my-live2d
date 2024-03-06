@@ -7,10 +7,11 @@ oh-my-live2d 官网: https://oml2d.com/
 \_config.yml
 
 ```yaml
+# hexo-oh-my-live2d 配置
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
-  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.7/files/dist/index.min.js
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.8/files/dist/index.min.js
   option:
     fixed: true # 组件是否使用固定定位
     libraryUrls:
@@ -43,7 +44,26 @@ OhMyLive2d:
         offsetY: -100
       idleTips:
         interval: 15000
-        wordTheDay: true
+        # message:
+        #   - 你好呀~
+        #   - 欢迎来到我的小站~
+        # 自定义提示语 需要 引入 axios 库 ,也可以使用其他方法
+        message: |
+           function(){
+             return axios.get('https://v1.hitokoto.cn')
+               .then(function (response) {
+                 return response.data.hitokoto ;
+               })
+               .catch(function (error) {
+                 console.error(error);
+               });
+           }
+        # wordTheDay: true
+        # 自定义  https://v1.hitokoto.cn  数据
+        # wordTheDay: |
+        #   function(wordTheDayData){
+        #     return `${wordTheDayData.hitokoto}    by.${wordTheDayData.from}`;
+        #   }
 ```
 
 css 修改

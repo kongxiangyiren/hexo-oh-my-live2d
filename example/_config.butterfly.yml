@@ -1,0 +1,14 @@
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+
+highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / false
+
+inject:
+  head:
+  # 自定义css
+    - <link rel="stylesheet" href="/css/custom.css">
+  bottom:
+    - <script src="https://registry.npmmirror.com/axios/latest/files/dist/axios.min.js"></script>

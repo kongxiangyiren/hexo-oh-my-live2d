@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/nodemon.json",
+  "verbose": true,
+  "delay": 1000,
+  "watch": [
+    "./_config.yml",
+    "./_config.butterfly.yml",
+    "../dist/index.js"
+  ],
+  "ext": "js,yml,yaml",
+  "exec": "hexo server"
+}

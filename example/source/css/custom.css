@@ -1,0 +1,31 @@
+/* live2d 模型居右 */
+#oml2dStage {
+  right: 60px !important;
+  left: auto !important;
+  z-index: 30 !important;
+}
+/* live2d tips 深色 */
+[data-theme='dark'] #oml2dTips {
+  background-color: #121212 !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  /* filter: drop-shadow(0 0 5px #999)!important; */
+  filter: none !important;
+}
+/* live2d 左边提示 深色 */
+[data-theme='dark'] #oml2dStatusBar {
+  background-color: #121212 !important;
+  border-style: solid !important;
+  border-width: 2px 2px 2px 0px !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 4px #999 !important;
+}
+/* live2d 切换按钮 深色 */
+[data-theme='dark'] #oml2dMenus .oml2d-menus-item {
+  background-color: #1f1f1f;
+}
+[data-theme='dark'] #oml2dMenus .oml2d-menus-item:hover {
+  background-color: #787878;
+}
+[data-theme='dark'] #oml2dMenus .oml2d-menus-item svg {
+  color: rgba(255, 255, 255, 0.7);
+}
