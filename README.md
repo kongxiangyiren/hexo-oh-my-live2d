@@ -11,7 +11,7 @@ oh-my-live2d 官网: https://oml2d.com/
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
-  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.8/files/dist/index.min.js
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.9/files/dist/index.min.js
   option:
     fixed: true # 组件是否使用固定定位
     libraryUrls:
@@ -20,6 +20,14 @@ OhMyLive2d:
       # cubism2: https://registry.npmmirror.com/live2dcubismcore/1.0.2/files/live2d.min.js
       # cubism5: https://registry.npmmirror.com/live2dcubismcore/1.0.2/files/live2dcubismcore.min.js
     models:
+      - path: https://registry.npmmirror.com/live2d-widget-model-shizuku/1.0.5/files/assets/shizuku.model.json
+        motionPreloadStrategy: IDLE
+        showHitAreaFrames: false
+        scale: 0.15
+        position: [-10, 35]
+        stageStyle:
+          width: 250
+          height: 250
       - path: 'https://registry.npmmirror.com/live2d-widget-model-koharu/1.0.5/files/assets/koharu.model.json'
         scale: 0.12
         position: [0, 0]
@@ -49,15 +57,15 @@ OhMyLive2d:
         #   - 欢迎来到我的小站~
         # 自定义提示语 需要 引入 axios 库 ,也可以使用其他方法
         message: |
-           function(){
-             return axios.get('https://v1.hitokoto.cn')
-               .then(function (response) {
-                 return response.data.hitokoto ;
-               })
-               .catch(function (error) {
-                 console.error(error);
-               });
-           }
+          function(){
+            return axios.get('https://v1.hitokoto.cn')
+              .then(function (response) {
+                return response.data.hitokoto ;
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
+          }
         # wordTheDay: true
         # 自定义  https://v1.hitokoto.cn  数据
         # wordTheDay: |
