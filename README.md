@@ -11,14 +11,13 @@ oh-my-live2d 官网: https://oml2d.com/
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
-  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.10/files/dist/index.min.js
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.12/files/dist/index.min.js
   option:
     # importType: 'cubism2' #  导入类型, 默认使用全量导入: complete , 可选值: complete, cubism2, cubism5
     libraryUrls: # 自定义 Cubism SDK 外部资源地址
-      cubism2: https://registry.npmmirror.com/live2dcubismcore/latest/files/live2d.min.js
-      cubism5: https://registry.npmmirror.com/live2dcubismcore/latest/files/live2dcubismcore.min.js
-      # cubism2: https://registry.npmmirror.com/live2dcubismcore/1.0.2/files/live2d.min.js
-      # cubism5: https://registry.npmmirror.com/live2dcubismcore/1.0.2/files/live2dcubismcore.min.js
+      complete: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/complete.js
+      cubism2: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism2.js
+      cubism5: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism5.js
     mobileDisplay: true # 是否在移动端显示
     models:
       - path: https://registry.npmmirror.com/live2d-widget-model-shizuku/1.0.5/files/assets/shizuku.model.json
@@ -94,7 +93,7 @@ css 修改
 
 ```css
 /* live2d 模型居右 如果要在左边请无视 */
-#oml2dStage {
+#oml2d-stage {
   right: 60px !important;
   left: auto !important;
   z-index: 30 !important;

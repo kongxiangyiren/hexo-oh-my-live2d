@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/kongxiangyiren/hexo-oh-my-live2d#readme",
   "dependencies": {
-    "oh-my-live2d": "^0.10.0"
+    "oh-my-live2d": "^0.12.0"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
