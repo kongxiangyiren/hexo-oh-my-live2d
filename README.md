@@ -11,13 +11,33 @@ oh-my-live2d 官网: https://oml2d.com/
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
-  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.12/files/dist/index.min.js
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.13/files/dist/index.min.js
   option:
     # importType: 'cubism2' #  导入类型, 默认使用全量导入: complete , 可选值: complete, cubism2, cubism5
     libraryUrls: # 自定义 Cubism SDK 外部资源地址
       complete: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/complete.js
       cubism2: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism2.js
       cubism5: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism5.js
+    # menus:
+      # items: |
+      #   (defaultItems)=>{
+      #    return [
+      #      ...defaultItems,
+      #      {
+      #        id: 'github',
+      #        icon: 'github-fill',
+      #        title: '我的github',
+      #        onClick: ()=>window.open('https://github.com/hacxy')
+      #      }
+      #    ]
+      #   }
+
+      # items:
+      #   - id: 'github'
+      #     icon: 'github-fill'
+      #     title: '我的github'
+      #     onClick: ()=>window.open('https://github.com/hacxy')
+
     mobileDisplay: true # 是否在移动端显示
     models:
       - path: https://registry.npmmirror.com/live2d-widget-model-shizuku/1.0.5/files/assets/shizuku.model.json
@@ -87,6 +107,14 @@ OhMyLive2d:
         #   function(wordTheDayData){
         #     return `${wordTheDayData.hitokoto}    by.${wordTheDayData.from}`;
         #   }
+  # 具体方法请看: https://oml2d.com/guide/loadModel.html#oml2d-%E5%AE%9E%E4%BE%8B
+  # then: |
+  #   (oml2d)=>{
+  #      setTimeout(() => {
+  #     oml2d.tipsMessage('hello world', 3000, 10);
+  #   }, 8000);
+  #   }
+
 ```
 
 css 修改

@@ -16,7 +16,8 @@ hexo.extend.filter.register('after_generate', function () {
         ? `/pluginsSrc/${fullPath}`
         : config.CDN
       : 'https://registry.npmmirror.com/oh-my-live2d/latest/files',
-    option: config.option ? config.option : {}
+    option: config.option ? config.option : {},
+    then: config.then ? config.then : () => {}
   };
 
   // 脚本资源
@@ -29,6 +30,44 @@ hexo.extend.filter.register('after_generate', function () {
       // parentElement 不要转换成字符串
       if (key === 'parentElement') {
         JsList.push(`parentElement:${element}`);
+      } else if (key === 'menus') {
+        const menusList: string[] = [];
+        for (const menusKey in element) {
+          if (Object.prototype.hasOwnProperty.call(element, menusKey)) {
+            const menusElement = element[menusKey];
+            if (menusKey === 'items') {
+              // 判断是不是数组
+              if (Array.isArray(menusElement)) {
+                //  判断有没有onClick
+                if (menusElement.some(item => item.onClick)) {
+                  const itemsList: string[] = [];
+                  for (const item of menusElement) {
+                    const itemList: string[] = [];
+                    for (const itemKey in item) {
+                      if (Object.prototype.hasOwnProperty.call(item, itemKey)) {
+                        const itemElement = item[itemKey];
+                        if (itemKey === 'onClick') {
+                          itemList.push(`${itemKey}:${itemElement}`);
+                        } else {
+                          itemList.push(`${itemKey}:${JSON.stringify(itemElement)}`);
+                        }
+                      }
+                    }
+                    itemsList.push(`{${itemList.join(',')}}`);
+                  }
+                  menusList.push(`items:[${itemsList.join(',')}]`);
+                } else {
+                  menusList.push(`items:${JSON.stringify(menusElement)}`);
+                }
+              } else {
+                menusList.push(`items:${menusElement}`);
+              }
+            } else {
+              menusList.push(`${menusKey}:${JSON.stringify(menusElement)}`);
+            }
+          }
+        }
+        JsList.push(`${key}:{${menusList.join(',')}}`);
       } else if (key === 'tips') {
         const tipsList: string[] = [];
         for (const tipsKey in element) {
@@ -67,7 +106,8 @@ hexo.extend.filter.register('after_generate', function () {
   }
 
   // 用户自定义配置
-  const user_info_js = '<script>OML2D.loadOml2d({' + JsList.join(',') + '});</script>';
+  const user_info_js =
+    '<script>OML2D.loadOml2d({' + JsList.join(',') + '}).then(' + data.then + ');</script>';
 
   // @ts-expect-error
   hexo.extend.injector.register('body_end', js_text, 'default');
