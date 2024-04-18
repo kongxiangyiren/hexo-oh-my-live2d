@@ -11,32 +11,38 @@ oh-my-live2d 官网: https://oml2d.com/
 OhMyLive2d:
   enable: true
   CDN: https://registry.npmmirror.com/oh-my-live2d/latest/files
-  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.13/files/dist/index.min.js
+  # CDN: https://registry.npmmirror.com/oh-my-live2d/0.16/files/dist/index.min.js
   option:
+    dockedPosition: 'right' # 模型停靠位置 默认值: 'right' 可选值: 'left' | 'right'
     # importType: 'cubism2' #  导入类型, 默认使用全量导入: complete , 可选值: complete, cubism2, cubism5
     libraryUrls: # 自定义 Cubism SDK 外部资源地址
       complete: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/complete.js
       cubism2: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism2.js
       cubism5: https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism5.js
-    # menus:
-      # items: |
-      #   (defaultItems)=>{
-      #    return [
-      #      ...defaultItems,
-      #      {
-      #        id: 'github',
-      #        icon: 'github-fill',
-      #        title: '我的github',
-      #        onClick: ()=>window.open('https://github.com/hacxy')
-      #      }
-      #    ]
-      #   }
 
-      # items:
-      #   - id: 'github'
-      #     icon: 'github-fill'
-      #     title: '我的github'
-      #     onClick: ()=>window.open('https://github.com/hacxy')
+    # menus: |
+    #   (currentModel) =>{
+    #     console.log(currentModel);
+    #   }
+    # menus:
+    # items: |
+    #   (defaultItems)=>{
+    #    return [
+    #      ...defaultItems,
+    #      {
+    #        id: 'github',
+    #        icon: 'github-fill',
+    #        title: '我的github',
+    #        onClick: ()=>window.open('https://github.com/hacxy')
+    #      }
+    #    ]
+    #   }
+
+    # items:
+    #   - id: 'github'
+    #     icon: 'github-fill'
+    #     title: '我的github'
+    #     onClick: ()=>window.open('https://github.com/hacxy')
 
     mobileDisplay: true # 是否在移动端显示
     models:
@@ -109,21 +115,7 @@ OhMyLive2d:
         #   }
   # 具体方法请看: https://oml2d.com/guide/loadModel.html#oml2d-%E5%AE%9E%E4%BE%8B
   # then: |
-  #   (oml2d)=>{
-  #      setTimeout(() => {
-  #     oml2d.tipsMessage('hello world', 3000, 10);
-  #   }, 8000);
-  #   }
-
-```
-
-css 修改
-
-```css
-/* live2d 模型居右 如果要在左边请无视 */
-#oml2d-stage {
-  right: 60px !important;
-  left: auto !important;
-  z-index: 30 !important;
-}
+  #    oml2d.onStageSlideIn(() => {
+  #    oml2d.tipsMessage('Oh My Live2D !!!', 3000, 10);
+  #    });
 ```

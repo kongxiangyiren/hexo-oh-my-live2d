@@ -17,7 +17,7 @@ hexo.extend.filter.register('after_generate', function () {
         : config.CDN
       : 'https://registry.npmmirror.com/oh-my-live2d/latest/files',
     option: config.option ? config.option : {},
-    then: config.then ? config.then : () => {}
+    then: config.then ? config.then : ''
   };
 
   // 脚本资源
@@ -31,74 +31,83 @@ hexo.extend.filter.register('after_generate', function () {
       if (key === 'parentElement') {
         JsList.push(`parentElement:${element}`);
       } else if (key === 'menus') {
-        const menusList: string[] = [];
-        for (const menusKey in element) {
-          if (Object.prototype.hasOwnProperty.call(element, menusKey)) {
-            const menusElement = element[menusKey];
-            if (menusKey === 'items') {
-              // 判断是不是数组
-              if (Array.isArray(menusElement)) {
-                //  判断有没有onClick
-                if (menusElement.some(item => item.onClick)) {
-                  const itemsList: string[] = [];
-                  for (const item of menusElement) {
-                    const itemList: string[] = [];
-                    for (const itemKey in item) {
-                      if (Object.prototype.hasOwnProperty.call(item, itemKey)) {
-                        const itemElement = item[itemKey];
-                        if (itemKey === 'onClick') {
-                          itemList.push(`${itemKey}:${itemElement}`);
-                        } else {
-                          itemList.push(`${itemKey}:${JSON.stringify(itemElement)}`);
+        // 如果element不是字符串
+        if (typeof element === 'object') {
+          const menusList: string[] = [];
+          for (const menusKey in element) {
+            if (Object.prototype.hasOwnProperty.call(element, menusKey)) {
+              const menusElement = element[menusKey];
+              if (menusKey === 'items') {
+                // 判断是不是数组
+                if (Array.isArray(menusElement)) {
+                  //  判断有没有onClick
+                  if (menusElement.some(item => item.onClick)) {
+                    const itemsList: string[] = [];
+                    for (const item of menusElement) {
+                      const itemList: string[] = [];
+                      for (const itemKey in item) {
+                        if (Object.prototype.hasOwnProperty.call(item, itemKey)) {
+                          const itemElement = item[itemKey];
+                          if (itemKey === 'onClick') {
+                            itemList.push(`${itemKey}:${itemElement}`);
+                          } else {
+                            itemList.push(`${itemKey}:${JSON.stringify(itemElement)}`);
+                          }
                         }
                       }
+                      itemsList.push(`{${itemList.join(',')}}`);
                     }
-                    itemsList.push(`{${itemList.join(',')}}`);
+                    menusList.push(`items:[${itemsList.join(',')}]`);
+                  } else {
+                    menusList.push(`items:${JSON.stringify(menusElement)}`);
                   }
-                  menusList.push(`items:[${itemsList.join(',')}]`);
                 } else {
-                  menusList.push(`items:${JSON.stringify(menusElement)}`);
+                  menusList.push(`items:${menusElement}`);
                 }
               } else {
-                menusList.push(`items:${menusElement}`);
+                menusList.push(`${menusKey}:${JSON.stringify(menusElement)}`);
               }
-            } else {
-              menusList.push(`${menusKey}:${JSON.stringify(menusElement)}`);
             }
           }
+          JsList.push(`${key}:{${menusList.join(',')}}`);
+        } else {
+          JsList.push(`${key}:${element}`);
         }
-        JsList.push(`${key}:{${menusList.join(',')}}`);
       } else if (key === 'tips') {
-        const tipsList: string[] = [];
-        for (const tipsKey in element) {
-          if (Object.prototype.hasOwnProperty.call(element, tipsKey)) {
-            const tipsElement = element[tipsKey];
-            if (tipsKey === 'idleTips') {
-              const idleTipsList: string[] = [];
-              for (const idleTipsKey in tipsElement) {
-                if (Object.prototype.hasOwnProperty.call(tipsElement, idleTipsKey)) {
-                  const idleTipsElement = tipsElement[idleTipsKey];
-                  if (idleTipsKey === 'wordTheDay') {
-                    idleTipsList.push(`wordTheDay:${idleTipsElement}`);
-                  } else if (idleTipsKey === 'message') {
-                    // 判断是不是数组
-                    if (Array.isArray(idleTipsElement)) {
-                      idleTipsList.push(`message:${JSON.stringify(idleTipsElement)}`);
+        if (typeof element === 'object') {
+          const tipsList: string[] = [];
+          for (const tipsKey in element) {
+            if (Object.prototype.hasOwnProperty.call(element, tipsKey)) {
+              const tipsElement = element[tipsKey];
+              if (tipsKey === 'idleTips') {
+                const idleTipsList: string[] = [];
+                for (const idleTipsKey in tipsElement) {
+                  if (Object.prototype.hasOwnProperty.call(tipsElement, idleTipsKey)) {
+                    const idleTipsElement = tipsElement[idleTipsKey];
+                    if (idleTipsKey === 'wordTheDay') {
+                      idleTipsList.push(`wordTheDay:${idleTipsElement}`);
+                    } else if (idleTipsKey === 'message') {
+                      // 判断是不是数组
+                      if (Array.isArray(idleTipsElement)) {
+                        idleTipsList.push(`message:${JSON.stringify(idleTipsElement)}`);
+                      } else {
+                        idleTipsList.push(`message:${idleTipsElement}`);
+                      }
                     } else {
-                      idleTipsList.push(`message:${idleTipsElement}`);
+                      idleTipsList.push(`${idleTipsKey}:${JSON.stringify(idleTipsElement)}`);
                     }
-                  } else {
-                    idleTipsList.push(`${idleTipsKey}:${JSON.stringify(idleTipsElement)}`);
                   }
                 }
+                tipsList.push(`idleTips:{${idleTipsList.join(',')}}`);
+              } else {
+                tipsList.push(`${tipsKey}: ${JSON.stringify(tipsElement)}`);
               }
-              tipsList.push(`idleTips:{${idleTipsList.join(',')}}`);
-            } else {
-              tipsList.push(`${tipsKey}: ${JSON.stringify(tipsElement)}`);
             }
           }
+          JsList.push(`${key}:{${tipsList.join(',')}}`);
+        } else {
+          JsList.push(`${key}:${element}`);
         }
-        JsList.push(`${key}:{${tipsList.join(',')}}`);
       } else {
         JsList.push(`${key}:${JSON.stringify(element)}`);
       }
@@ -107,7 +116,7 @@ hexo.extend.filter.register('after_generate', function () {
 
   // 用户自定义配置
   const user_info_js =
-    '<script>OML2D.loadOml2d({' + JsList.join(',') + '}).then(' + data.then + ');</script>';
+    '<script>const oml2d = OML2D.loadOml2d({' + JsList.join(',') + '});' + data.then + '</script>';
 
   // @ts-expect-error
   hexo.extend.injector.register('body_end', js_text, 'default');

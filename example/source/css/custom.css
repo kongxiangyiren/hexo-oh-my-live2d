@@ -1,6 +1,0 @@
-/* live2d 模型居右 如果要在左边请无视 */
-#oml2d-stage {
-  right: 60px !important;
-  left: auto !important;
-  z-index: 30 !important;
-}

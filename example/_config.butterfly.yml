@@ -7,9 +7,6 @@ menu:
 highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / false
 
 inject:
-  head:
-    # 自定义css
-    - <link rel="stylesheet" href="/css/custom.css">
   bottom:
     - <script src="https://registry.npmmirror.com/axios/latest/files/dist/axios.min.js"></script>
 
@@ -18,4 +15,4 @@ CDN:
   custom_format: https://registry.npmmirror.com/${name}/${version}/files/${file}
 
   option:
-    twikoo: https://registry.npmmirror.com/twikoo/1.6.31/files/dist/twikoo.all.min.js
+    twikoo: https://registry.npmmirror.com/twikoo/1.6.32/files/dist/twikoo.all.min.js
