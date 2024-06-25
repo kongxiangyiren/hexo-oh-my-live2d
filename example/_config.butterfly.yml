@@ -8,11 +8,11 @@ highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / 
 
 inject:
   bottom:
-    - <script src="https://registry.npmmirror.com/axios/latest/files/dist/axios.min.js"></script>
+    - <script src="https://unpkg.com/axios"></script>
 
 CDN:
   third_party_provider: custom
-  custom_format: https://registry.npmmirror.com/${name}/${version}/files/${file}
+  custom_format: https://unpkg.com/${name}@${version}/${file}
 
   option:
-    twikoo: https://registry.npmmirror.com/twikoo/1.6.32/files/dist/twikoo.all.min.js
+    twikoo: https://unpkg.com/twikoo

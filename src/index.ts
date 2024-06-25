@@ -15,7 +15,7 @@ hexo.extend.filter.register('after_generate', function () {
       ? config.CDN === 'local'
         ? `/pluginsSrc/${fullPath}`
         : config.CDN
-      : 'https://registry.npmmirror.com/oh-my-live2d/latest/files',
+      : 'https://unpkg.com/oh-my-live2d',
     option: config.option ? config.option : {},
     then: config.then ? config.then : ''
   };
